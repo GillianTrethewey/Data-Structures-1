@@ -20,22 +20,23 @@ At the end, return a pointer the first node in the list.
   *   }
   * }
   */
- function tree2list(root) {
-  /* your code here */
-}
-*/
+
+let root = {
+  value: 1,
+  left: null,
+  right: { value: 2, left: 1, right: { value: 3, left: 2, right: null } },
+};
+
 // Either need a helper function or a default parameter to pass
 // in the tail of the list. Start out with an empty list, so null.
 function tree2list(root, listTail = null) {
   if (!root) return listTail;
-
 
   // First, we're looking for the last node, so we're going
   // as far right as we can.
   if (root.right) {
     listTail = tree2list(root.right, listTail);
   }
-
 
   // If there is no right node, then this is the last one
   // in the in-order traversal, so prepend that to the tail
@@ -46,14 +47,13 @@ function tree2list(root, listTail = null) {
     listTail.left = listHead;
   }
 
-
   // Now look at the left subtree and pass in the list
   // we've created so far.
   if (root.left) {
     listHead = tree2list(root.left, listHead);
   }
 
-
   // Return the list as we've built it up to this point.
   return listHead;
 }
+console.log(tree2list(root));
