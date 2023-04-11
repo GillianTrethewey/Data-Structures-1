@@ -19,8 +19,22 @@ All of every node's sub bullets must come before the next bullet at that node's 
   *   }
   * }
   */
-function flattenSublist(head) {
+function flattenSublist(inputList) {
   const output = [];
+
+  function dfs(node) {
+    if (!node) {
+      return;
+    }
+    if (node.value) {
+      output.push(node.value);
+    }
+
+    dfs(node.sublist);
+    dfs(node.next);
+  }
+
+  dfs(inputList);
 
   return output;
 }
