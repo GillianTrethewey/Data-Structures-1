@@ -14,18 +14,28 @@ The last two values are special cases because there are no days in the future pr
   */
 
 function daysToHigherTemp(dailyHighs) {
-  let results = [];
-  dailyHighs.map((e, index, a) => {
-    for (let i = index + 1; i < a.length; i++) {
-      if (a[i] > e) {
-        results.push(i);
+  const output = [];
+
+  for (let day = 0; day < dailyHighs.length; day++) {
+    const highTemp = dailyHighs[day];
+    let count = 0;
+
+    // Now loop forward from the day after and look for a higher
+    // temperature.
+    for (let i = day + 1; i < dailyHighs.length; i++) {
+      if (dailyHighs[i] > highTemp) {
+        // If we find one, record how many days forward we
+        // had to look and then break out of this loop.
+        count = i - day;
         break;
-      } else {
-        results.push(0);
       }
     }
-  });
-  return results;
+
+    // Add the count to the output.
+    output.push(count);
+  }
+
+  return output;
 }
 let dailyHighs = [50, 55, 53, 52, 60, 65, 63];
 console.log(daysToHigherTemp(dailyHighs));
