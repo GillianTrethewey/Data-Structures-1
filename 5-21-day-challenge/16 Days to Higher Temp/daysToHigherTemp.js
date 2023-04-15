@@ -2,40 +2,22 @@
 
 Prompt
 
-Given an array of daily high temperatures for a city, produce a new array as output where each 
-value is the number of days forward that has a temperature higher than this day. 
-All of the temperature values are normal earth temperatures.
+Given a triangle array, return the minimum path sum from top to bottom. 
+For each step, you may move to an adjacent number of the row below. 
+More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row. 
+For example, if given the following input:
 
+[
+  [2],
+  [3,4],
+  [6,5,7],
+  [4,1,8,3]
+]
 
-For example, if the daily highs are [50, 55, 53, 52, 60, 65, 63], 
-then the result should be [ 1,  3,  2,  1,  1,  0,  0]. 
-The last two values are special cases because there are no days in the future predicted to be hotter.
+Here, the result is 11 because of the path 2 + 3 + 5 + 1.
 
   */
 
-function daysToHigherTemp(dailyHighs) {
-  const output = [];
+function triangleLowestPath() {}
 
-  for (let day = 0; day < dailyHighs.length; day++) {
-    const highTemp = dailyHighs[day];
-    let count = 0;
-
-    // Now loop forward from the day after and look for a higher
-    // temperature.
-    for (let i = day + 1; i < dailyHighs.length; i++) {
-      if (dailyHighs[i] > highTemp) {
-        // If we find one, record how many days forward we
-        // had to look and then break out of this loop.
-        count = i - day;
-        break;
-      }
-    }
-
-    // Add the count to the output.
-    output.push(count);
-  }
-
-  return output;
-}
-let dailyHighs = [50, 55, 53, 52, 60, 65, 63];
-console.log(daysToHigherTemp(dailyHighs));
+console.log(triangleLowestPath());
