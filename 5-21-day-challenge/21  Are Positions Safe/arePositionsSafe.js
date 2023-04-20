@@ -16,4 +16,40 @@ diagonal directions and any number of spaces.
 The board is rectangular and is large enough for all of the queens and positions to be valid.
 */
 
-function arePositionsSafe(queens, positions) {}
+function arePositionsSafe(queens, positions) {
+  // Initialize sets for each axis of potential attack.
+  const rows = new Set();
+  const columns = new Set();
+  const posDiagonals = new Set();
+  const negDiagonals = new Set();
+
+  // For each queen position (row, col), remember which axes
+  // it can attack along.
+  for (const [row, col] of queens) {
+    // For the horizontal and vertical axes, we can just
+    // remember the row and column index.
+    rows.add(row);
+    columns.add(col);
+    // We'll remember the diagonals based on where that line
+    // crosses the Y-axis.
+    posDiagonals.add(col - row);
+    negDiagonals.add(row + col);
+  }
+
+  const output = [];
+
+  // Now scan through the positions and set the value in the output
+  // array. A position is safe if it's axes weren't marked in the
+  // first pass.
+  for (const [row, col] of positions) {
+    const mayBeAttacked =
+      rows.has(row) ||
+      columns.has(col) ||
+      posDiagonals.has(col - row) ||
+      negDiagonals.has(row + col);
+
+    output.push(!mayBeAttacked);
+  }
+
+  return output;
+}
